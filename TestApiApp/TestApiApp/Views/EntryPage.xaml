@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TestApiApp.Views.EntryPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="{Binding API}"/>
+            <Label Text="{Binding Description}"/>
+            <Label Text="{Binding Auth}"/>
+            <Label Text="{Binding Cons}"/>
+            <Label Text="{Binding Link}"/>
+            <Label Text="{Binding Category}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
