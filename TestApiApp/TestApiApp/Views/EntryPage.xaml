@@ -8,7 +8,11 @@
             <Label Text="{Binding Description}"/>
             <Label Text="{Binding Auth}"/>
             <Label Text="{Binding Cons}"/>
-            <Label Text="{Binding Link}"/>
+            <Label Text="{Binding Link}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Label.GestureRecognizers>
+            </Label>
             <Label Text="{Binding Category}"/>
         </StackLayout>
     </ContentPage.Content>
