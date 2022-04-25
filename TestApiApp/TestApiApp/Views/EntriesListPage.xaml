@@ -2,6 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TestApiApp.Views.EntriesListPage">
+    <NavigationPage.TitleView>
+        <SearchBar x:Name="SearchBarMain" HeightRequest="44" WidthRequest="300" TextChanged="SearchBar_TextChanged"/>
+    </NavigationPage.TitleView>
     <ListView x:Name="LVDeds" HasUnevenRows="True"
               ItemSelected="LVDeds_ItemSelected">
         <ListView.ItemTemplate>

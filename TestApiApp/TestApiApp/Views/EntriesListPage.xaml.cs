@@ -27,5 +27,15 @@ namespace TestApiApp.Views
         {
             Navigation.PushAsync(new EntryPage(LVDeds.SelectedItem as EntryModel));
         }
+
+        private async void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var apis = await App.RequestManager.GetEntrieModels();
+
+            LVDeds.ItemsSource = apis.Where(
+                api => api.API.Contains(SearchBarMain.Text) || 
+                api.Description.Contains(SearchBarMain.Text)
+            ).ToList();
+        }
     }
 }
