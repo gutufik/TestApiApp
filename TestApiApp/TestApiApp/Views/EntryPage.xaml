@@ -8,7 +8,7 @@
             <Label Text="{Binding Description}"/>
             <Label Text="{Binding Auth}"/>
             <Label Text="{Binding Cons}"/>
-            <Label Text="{Binding Link}">
+            <Label Text="{Binding Link}" TextColor="blue">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                 </Label.GestureRecognizers>
