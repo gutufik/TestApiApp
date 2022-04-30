@@ -8,6 +8,8 @@ namespace TestApiApp.Services
 {
     public interface IRestService
     {
-        Task<List<EntryModel>> GetDataAsync();
+        Task<List<Cat>> GetTodoItemAsync();
+        Task SaveTodoItemAsync(Cat cat, bool isNewItem);
+        Task DeleteTodoItemAsync(Cat cat);
     }
 }

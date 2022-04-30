@@ -13,9 +13,18 @@ namespace TestApiApp.Services
         {
             restService = service;
         }
-        public Task<List<EntryModel>> GetEntrieModels()
+        public Task<List<Cat>> GetCats()
         {
-            return restService.GetDataAsync();
+            return restService.GetTodoItemAsync();
+        }
+
+        public Task DeleteTodoAsync(Cat item)
+        {
+            return restService.DeleteTodoItemAsync(item);
+        }
+        public Task SaveItemAsync(Cat todoItem, bool isNewItem = false)
+        {
+            return restService.SaveTodoItemAsync(todoItem, isNewItem);
         }
     }
 }

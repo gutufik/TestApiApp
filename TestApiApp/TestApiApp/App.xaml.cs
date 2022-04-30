@@ -15,7 +15,7 @@ namespace TestApiApp
             InitializeComponent();
 
             RequestManager = new RequestManager(new RestService());
-            MainPage = new NavigationPage(new EntriesListPage()) { BarBackgroundColor = Color.Red };
+            MainPage = new NavigationPage(new CatsPage()) { BarBackgroundColor = Color.Red };
         }
 
         protected override void OnStart()

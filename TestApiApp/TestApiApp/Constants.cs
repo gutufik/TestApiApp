@@ -6,6 +6,6 @@ namespace TestApiApp
 {
     public static class Constants
     {
-        public static string RestUrl = "https://api.publicapis.org/entries";
+        public static string RestUrl = "http://10.0.4.160:5000/api/CatItems";
     }
 }
