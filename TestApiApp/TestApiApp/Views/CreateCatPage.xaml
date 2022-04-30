@@ -4,11 +4,9 @@
              x:Class="TestApiApp.Views.CreateCatPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label HorizontalOptions="CenterAndExpand" Text="Название задачи" />
-            <Entry Placeholder="введите текст" Text="{Binding Name}"/>
-            <Label HorizontalOptions="CenterAndExpand" Text="Описание задачи" />
-            <Entry Placeholder="введите текст" Text="{Binding Notes}"/>
-            <Switch IsToggled="{Binding Done}" />
+            <Entry Placeholder="введите текст" Text="{Binding name}"/>
+            <Entry Placeholder="цвет" Text="{Binding color}"/>
+            <Switch IsToggled="{Binding gender}" />
             <Button Clicked="SaveButton_Clicked" Text="Сохранить" />
             <Button Clicked="DeleteButton_Clicked" Text="Удалить" />
         </StackLayout>

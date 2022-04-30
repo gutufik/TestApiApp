@@ -2,6 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TestApiApp.Views.CatsPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="ToolbarItem_Clicked" Text="+" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ListView x:Name="CatsLV" ItemSelected="CatsLV_ItemSelected">
             <ListView.ItemTemplate>
