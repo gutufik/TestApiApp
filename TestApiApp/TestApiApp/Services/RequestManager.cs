@@ -13,9 +13,9 @@ namespace TestApiApp.Services
         {
             restService = service;
         }
-        public Task<List<EntryModel>> GetEntrieModels()
+        public Task<WeatherRoot> GetWeather(string city)
         {
-            return restService.GetDataAsync();
+            return restService.GetWeatherAsync(city);
         }
     }
 }

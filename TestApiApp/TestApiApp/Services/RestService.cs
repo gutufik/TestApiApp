@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace TestApiApp.Services
 {
@@ -12,38 +13,41 @@ namespace TestApiApp.Services
     {
         HttpClient client;
         JsonSerializerOptions options;
-        RootModel rootModel { get; set; }
+        WeatherRoot rootModel { get; set; }
         public RestService()
         {
             client = new HttpClient();
+            options = new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true,
+            };
 
         }
-        public async Task<List<EntryModel>> GetDataAsync()
+        public async Task<WeatherRoot> GetWeatherAsync(string city)
         {
+            var apiKey = Constants.GetApiKey();
 
-            Uri uri = new Uri(string.Format(Constants.RestUrl, string.Empty));
+            Uri uri = new Uri($"{Constants.RestUrl}?q={city}&appid={apiKey}");
+            WeatherRoot weatherData = null;
             try
             {
-                Debug.WriteLine("Start Requests");
-                HttpResponseMessage responseMessage = await client.GetAsync(uri);
-                Debug.WriteLine("End Request");
-
-                if (responseMessage.IsSuccessStatusCode)
+                var response = await client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
                 {
-                    string content = await responseMessage.Content.ReadAsStringAsync();
-                    rootModel = JsonSerializer.Deserialize<RootModel>(content);
-                }
-                else
-                {
-                    Debug.WriteLine("Bad Requset");
+                    var content = await response.Content.ReadAsStringAsync();
+                    weatherData = JsonConvert.DeserializeObject<WeatherRoot>(content);
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                Debug.WriteLine("\t\tERROR {0}", ex.Message);
             }
 
-            return rootModel.entries;
+            return weatherData;
+
+            //return rootModel.entries;
+            //return rootModel.Weather;
         }
     }
 }

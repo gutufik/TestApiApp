@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using TestApiApp.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using TestApiApp.Models;
 
 namespace TestApiApp.Views
 {
@@ -15,6 +16,10 @@ namespace TestApiApp.Views
         public WeatherPage()
         {
             InitializeComponent();
+
+            var requestManager = new RequestManager(new RestService());
+            var weather = requestManager.GetWeather("kazan");
+            var w = weather.Result;
         }
     }
 }

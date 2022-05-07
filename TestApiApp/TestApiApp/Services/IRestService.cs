@@ -8,6 +8,6 @@ namespace TestApiApp.Services
 {
     public interface IRestService
     {
-        Task<List<EntryModel>> GetDataAsync();
+        Task<WeatherRoot> GetWeatherAsync(string city);
     }
 }
