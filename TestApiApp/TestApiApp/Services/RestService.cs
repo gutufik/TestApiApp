@@ -32,7 +32,7 @@ namespace TestApiApp.Services
 
         public async Task<WeatherRoot> GetWeather(string city)
         {
-            Uri uri = new Uri($"{Constants.RestUrl}?q={city}&appid={Constants.GetApiKey()}");
+            Uri uri = new Uri($"{Constants.RestUrl}?q={city}&appid={Constants.GetApiKey()}&units=metric");
             try
             {
                 Debug.WriteLine("Start Requests");
