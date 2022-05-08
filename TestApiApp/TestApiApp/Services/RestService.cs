@@ -3,51 +3,58 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
+
 
 namespace TestApiApp.Services
 {
     public class RestService : IRestService
     {
         HttpClient client;
-        JsonSerializerOptions options;
-        WeatherRoot rootModel { get; set; }
+        JsonSerializerOptions serializerOptions;
+        WeatherRoot Weather { get; set; }
         public RestService()
         {
-            client = new HttpClient();
-            options = new JsonSerializerOptions()
+            var httpClientHandler = new HttpClientHandler();
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+            serializerOptions = new JsonSerializerOptions()
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                 WriteIndented = true,
             };
-
         }
-        public async Task<WeatherRoot> GetWeatherAsync(string city)
-        {
-            var apiKey = Constants.GetApiKey();
 
-            Uri uri = new Uri($"{Constants.RestUrl}?q={city}&appid={apiKey}");
-            WeatherRoot weatherData = null;
+        public async Task<WeatherRoot> GetWeather(string city)
+        {
+            Uri uri = new Uri($"{Constants.RestUrl}?q={city}&appid={Constants.GetApiKey()}");
             try
             {
-                var response = await client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
+                Debug.WriteLine("Start Requests");
+                HttpResponseMessage responseMessage = await client.GetAsync(uri);
+                Debug.WriteLine("End Request");
+
+                if (responseMessage.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
-                    weatherData = JsonConvert.DeserializeObject<WeatherRoot>(content);
+                    string content = await responseMessage.Content.ReadAsStringAsync();
+                    Weather = JsonSerializer.Deserialize<WeatherRoot>(content, serializerOptions);
+                }
+                else
+                {
+                    Debug.WriteLine("Bad Requset");
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("\t\tERROR {0}", ex.Message);
+                Debug.WriteLine(ex.Message);
             }
 
-            return weatherData;
-
-            //return rootModel.entries;
-            //return rootModel.Weather;
+            return Weather;
         }
     }
 }

@@ -3,125 +3,80 @@ using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Xamarin.Forms.Maps;
 
 namespace TestApiApp.Models
 {
     public class WeatherRoot
     {
-        [JsonProperty("name")]
-        public string Title { get; set; }
-
-        [JsonProperty("coord")]
         public Coord Coord { get; set; }
 
-        [JsonProperty("weather")]
-        public Weather[] Weather { get; set; }
+        public Position Position
+        {
+            get
+            {
+                return new Position(Coord.Lat, Coord.Lon);
+            }
+        }
 
-        [JsonProperty("base")]
-        public string Base { get; set; }
-
-        [JsonProperty("main")]
+        public List<Weather> Weather { get; set; }
+        public string _base { get; set; }
         public Main Main { get; set; }
-
-        [JsonProperty("visibility")]
-        public long Visibility { get; set; }
-
-        [JsonProperty("wind")]
+        public int Visibility { get; set; }
         public Wind Wind { get; set; }
-
-        [JsonProperty("clouds")]
         public Clouds Clouds { get; set; }
-
-        [JsonProperty("dt")]
-        public long Dt { get; set; }
-
-        [JsonProperty("sys")]
+        public int Dt { get; set; }
         public Sys Sys { get; set; }
-
-        [JsonProperty("id")]
-        public long Id { get; set; }
-
-        [JsonProperty("cod")]
-        public long Cod { get; set; }
+        public int Timezone { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Cod { get; set; }
     }
 
 
     public class Clouds
     {
-        [JsonProperty("all")]
-        public long All { get; set; }
+        public int All { get; set; }
     }
 
     public class Coord
     {
-        [JsonProperty("lon")]
-        public double Lon { get; set; }
-
-        [JsonProperty("lat")]
-        public double Lat { get; set; }
+        public float Lon { get; set; }
+        public float Lat { get; set; }
     }
 
     public class Main
     {
-        [JsonProperty("temp")]
-        public string Temperature { get; set; }
-
-        [JsonProperty("pressure")]
-        public string Pressure { get; set; }
-
-        [JsonProperty("humidity")]
-        public string Humidity { get; set; }
-
-        [JsonProperty("temp_min")]
-        public string TempMin { get; set; }
-
-        [JsonProperty("temp_max")]
-        public string TempMax { get; set; }
+        public float Temp { get; set; }
+        public float Feels_like { get; set; }
+        public float Temp_min { get; set; }
+        public float Temp_max { get; set; }
+        public int Pressure { get; set; }
+        public int Humidity { get; set; }
     }
 
     public class Sys
     {
-        [JsonProperty("type")]
-        public long Type { get; set; }
-
-        [JsonProperty("id")]
-        public long Id { get; set; }
-
-        [JsonProperty("message")]
-        public double Message { get; set; }
-
-        [JsonProperty("country")]
+        public int Type { get; set; }
+        public int Id { get; set; }
+        public float Message { get; set; }
         public string Country { get; set; }
-
-        [JsonProperty("sunrise")]
-        public long Sunrise { get; set; }
-
-        [JsonProperty("sunset")]
-        public long Sunset { get; set; }
+        public int Sunrise { get; set; }
+        public int Sunset { get; set; }
     }
 
     public class Weather
     {
-        [JsonProperty("id")]
-        public long Id { get; set; }
-
-        [JsonProperty("main")]
-        public string Visibility { get; set; }
-
-        [JsonProperty("description")]
+        public int Id { get; set; }
+        public string Main { get; set; }
         public string Description { get; set; }
-
-        [JsonProperty("icon")]
         public string Icon { get; set; }
     }
 
     public class Wind
     {
-        [JsonProperty("speed")]
-        public double Speed { get; set; }
-
-        [JsonProperty("deg")]
-        public long Deg { get; set; }
+        public float Speed { get; set; }
+        public int Deg { get; set; }
     }
 }
 
