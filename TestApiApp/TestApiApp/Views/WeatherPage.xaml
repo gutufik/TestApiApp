@@ -23,8 +23,9 @@
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="Wind deg:"/>
-                    <Label Text="{Binding Wind.Deg}"/>
+                    <Label Text="Wind direction: "/>
+                    <Label Text="&#x2191;"
+                           FontSize="30" TextColor="Blue" Rotation="{Binding Wind.Deg}"/>
                 </StackLayout>
 
                 <ListView ItemsSource="{Binding Weather}" HasUnevenRows="True" HeightRequest="100">
@@ -33,6 +34,7 @@
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="Weather:"/>
+                                    <Image x:Name="IconImage" Source="{Binding IconImage}"/>
                                     <Label Text="{Binding Description}"/>
                                 </StackLayout>
                             </ViewCell>
